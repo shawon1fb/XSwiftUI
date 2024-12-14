@@ -46,68 +46,67 @@ extension NSBezierPath {
         self.init()
         
         let radius = min(cornerRadii.width, cornerRadii.height)
+        let minX = rect.minX
+        let minY = rect.minY
+        let maxX = rect.maxX
+        let maxY = rect.maxY
         
-        let topLeft = corners.contains(.topLeft)
-        let topRight = corners.contains(.topRight)
-        let bottomLeft = corners.contains(.bottomLeft)
-        let bottomRight = corners.contains(.bottomRight)
+        // Start from the correct position based on which corners are rounded
+        let startPoint = corners.contains(.topLeft)
+            ? CGPoint(x: minX + radius, y: minY)
+            : CGPoint(x: minX, y: minY)
         
-        // Start at top left
-        if topLeft {
-            self.move(to: NSPoint(x: rect.minX + radius, y: rect.minY))
+        move(to: startPoint)
+        
+        // Top edge and top right corner
+        if corners.contains(.topRight) {
+            line(to: CGPoint(x: maxX - radius, y: minY))
+            curve(to: CGPoint(x: maxX, y: minY + radius),
+                  controlPoint1: CGPoint(x: maxX - radius * 0.5, y: minY),
+                  controlPoint2: CGPoint(x: maxX, y: minY + radius * 0.5))
         } else {
-            self.move(to: NSPoint(x: rect.minX, y: rect.minY))
+            line(to: CGPoint(x: maxX, y: minY))
         }
         
-        // Top right corner
-        if topRight {
-            self.line(to: NSPoint(x: rect.maxX - radius, y: rect.minY))
-            self.appendArc(from: NSPoint(x: rect.maxX - radius, y: rect.minY),
-                          to: NSPoint(x: rect.maxX, y: rect.minY + radius),
-                          radius: radius)
+        // Right edge and bottom right corner
+        if corners.contains(.bottomRight) {
+            line(to: CGPoint(x: maxX, y: maxY - radius))
+            curve(to: CGPoint(x: maxX - radius, y: maxY),
+                  controlPoint1: CGPoint(x: maxX, y: maxY - radius * 0.5),
+                  controlPoint2: CGPoint(x: maxX - radius * 0.5, y: maxY))
         } else {
-            self.line(to: NSPoint(x: rect.maxX, y: rect.minY))
+            line(to: CGPoint(x: maxX, y: maxY))
         }
         
-        // Bottom right corner
-        if bottomRight {
-            self.line(to: NSPoint(x: rect.maxX, y: rect.maxY - radius))
-            self.appendArc(from: NSPoint(x: rect.maxX, y: rect.maxY - radius),
-                          to: NSPoint(x: rect.maxX - radius, y: rect.maxY),
-                          radius: radius)
+        // Bottom edge and bottom left corner
+        if corners.contains(.bottomLeft) {
+            line(to: CGPoint(x: minX + radius, y: maxY))
+            curve(to: CGPoint(x: minX, y: maxY - radius),
+                  controlPoint1: CGPoint(x: minX + radius * 0.5, y: maxY),
+                  controlPoint2: CGPoint(x: minX, y: maxY - radius * 0.5))
         } else {
-            self.line(to: NSPoint(x: rect.maxX, y: rect.maxY))
+            line(to: CGPoint(x: minX, y: maxY))
         }
         
-        // Bottom left corner
-        if bottomLeft {
-            self.line(to: NSPoint(x: rect.minX + radius, y: rect.maxY))
-            self.appendArc(from: NSPoint(x: rect.minX + radius, y: rect.maxY),
-                          to: NSPoint(x: rect.minX, y: rect.maxY - radius),
-                          radius: radius)
+        // Left edge and top left corner
+        if corners.contains(.topLeft) {
+            line(to: CGPoint(x: minX, y: minY + radius))
+            curve(to: CGPoint(x: minX + radius, y: minY),
+                  controlPoint1: CGPoint(x: minX, y: minY + radius * 0.5),
+                  controlPoint2: CGPoint(x: minX + radius * 0.5, y: minY))
         } else {
-            self.line(to: NSPoint(x: rect.minX, y: rect.maxY))
+            line(to: CGPoint(x: minX, y: minY))
         }
         
-        // Top left corner
-        if topLeft {
-            self.line(to: NSPoint(x: rect.minX, y: rect.minY + radius))
-            self.appendArc(from: NSPoint(x: rect.minX, y: rect.minY + radius),
-                          to: NSPoint(x: rect.minX + radius, y: rect.minY),
-                          radius: radius)
-        } else {
-            self.line(to: NSPoint(x: rect.minX, y: rect.minY))
-        }
-        
-        self.close()
+        close()
     }
     
     var cgPath: CGPath {
         let path = CGMutablePath()
         var points = [CGPoint](repeating: .zero, count: 3)
         
-        for i in 0...(self.elementCount - 1) {
-            let type = self.element(at: i, associatedPoints: &points)
+        for i in 0..<elementCount {
+            let type = element(at: i, associatedPoints: &points)
             
             switch type {
             case .moveTo:
@@ -118,11 +117,7 @@ extension NSBezierPath {
                 path.addCurve(to: points[2], control1: points[0], control2: points[1])
             case .closePath:
                 path.closeSubpath()
-            case .cubicCurveTo:
-                break
-            case .quadraticCurveTo:
-                break
-            @unknown default:
+             default:
                 break
             }
         }
