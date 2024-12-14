@@ -73,3 +73,12 @@ public struct VideoData: Codable, Hashable {
     self.autoRepeat = try container.decode(Bool.self, forKey: .autoRepeat)
   }
 }
+
+
+public extension MediaContentModel{
+    
+    static func image(url:String)->MediaContentModel{
+        .init(mediaType: .image, imageURL: url, videoData: nil, gifURL: nil)
+    }
+    
+}
