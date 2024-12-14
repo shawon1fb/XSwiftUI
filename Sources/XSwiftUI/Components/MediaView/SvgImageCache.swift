@@ -2,7 +2,7 @@ import SwiftUI
 import SVGView
 
 // MARK: - Models
-public struct CachedImageResource: Equatable {
+public struct CachedImageResource: Equatable, Sendable {
     let urlString: String
     let data: Data
     
