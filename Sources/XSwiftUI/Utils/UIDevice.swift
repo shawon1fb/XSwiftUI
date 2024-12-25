@@ -111,7 +111,8 @@ public class MacDevice: DeviceModelProvider {
         sysctlbyname("hw.model", nil, &size, nil, 0)
         var model = [CChar](repeating: 0, count: size)
         sysctlbyname("hw.model", &model, &size, nil, 0)
-        let identifier = String(cString: model)
+        let model2: [UInt8] = model.prefix { $0 != 0 }.map { UInt8(bitPattern: $0) }
+        let identifier = String(decoding: model2, as: UTF8.self)
         
         func mapToDevice(identifier: String) -> String {
             // Map common Mac identifiers to friendly names
