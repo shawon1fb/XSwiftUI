@@ -185,7 +185,7 @@ struct DVideoView: View {
 struct PlaceHolderImageView: View {
   var body: some View {
     Rectangle()
-      .foregroundStyle(Color(hexString: "#F4F4F4"))
+          .foregroundStyle(Color(hex: "#F4F4F4"))
       .frame(maxWidth: .infinity, maxHeight: .infinity)
       .overlay {
           Image(systemName: "apple.image.playground")

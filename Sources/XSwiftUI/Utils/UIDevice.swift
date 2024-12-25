@@ -13,6 +13,7 @@ import AppKit
 #endif
 
 // Protocol to provide common interface for both platforms
+@MainActor
 public protocol DeviceModelProvider {
     static var modelName: String { get }
 }
@@ -142,6 +143,7 @@ public class MacDevice: DeviceModelProvider {
 #endif
 
 // Helper class for platform-agnostic code
+@MainActor
 public class DeviceModel {
     public static var modelName: String {
         #if os(iOS)

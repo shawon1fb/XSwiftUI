@@ -32,25 +32,25 @@ extension CGFloat {
 
 extension CGFloat {
 
-  public func height() -> CGFloat {
-    return RM.shared.height(self)
-  }
+    @MainActor public func height() -> CGFloat {
+        return RM.shared.height(self)
+    }
 
-  public func width() -> CGFloat {
-    return RM.shared.width(self)
-  }
+    @MainActor public func width() -> CGFloat {
+        return RM.shared.width(self)
+    }
 
 }
 
 extension Int {
 
-  public func height() -> CGFloat {
-    return RM.shared.height(CGFloat(self))
-  }
+    @MainActor public func height() -> CGFloat {
+        return RM.shared.height(CGFloat(self))
+    }
 
-  public func width() -> CGFloat {
-    return RM.shared.width(CGFloat(self))
-  }
+    @MainActor public func width() -> CGFloat {
+        return RM.shared.width(CGFloat(self))
+    }
 
 }
 extension Int {

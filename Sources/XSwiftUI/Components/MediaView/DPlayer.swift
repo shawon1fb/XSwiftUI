@@ -119,6 +119,7 @@ struct CrossPlatformVideoPlayer: NSViewRepresentable {
 #endif
 
 // Extension to share common functionality between platforms
+
 extension CrossPlatformVideoPlayer {
     @MainActor
     func setupEndTimeObserver() {
@@ -131,7 +132,7 @@ extension CrossPlatformVideoPlayer {
             object: player.currentItem,
             queue: .main
         ) { _ in
-            @Sendable func handleVideoEnd() {
+            Task { @MainActor in
                 if autoRepeatValue {
                     playerRef.seek(to: .zero)
                     playerRef.play()
@@ -140,8 +141,6 @@ extension CrossPlatformVideoPlayer {
                     onVideoEndCallback?()
                 }
             }
-            
-            handleVideoEnd()
         }
     }
 }

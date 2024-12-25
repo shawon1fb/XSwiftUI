@@ -14,16 +14,17 @@ import UIKit
 import AppKit
 #endif
 
-public final class RM:Sendable {
+@MainActor
+public final class RM: Sendable {
     public static let shared = RM()
     
-    #if os(iOS)
-    var bounds: CGRect = UIScreen.main.bounds
-    #elseif os(macOS)
+#if os(iOS)
+    @MainActor private(set) var bounds: CGRect = UIScreen.main.bounds
+#elseif os(macOS)
     var bounds: CGRect {
         NSScreen.main?.frame ?? CGRect(x: 0, y: 0, width: 1440, height: 900)
     }
-    #endif
+#endif
     
     let baseWidth: CGFloat = 375
     let baseHeight: CGFloat = 812
@@ -31,20 +32,20 @@ public final class RM:Sendable {
     let iphone10Width: CGFloat = 375
     let iphone10Height: CGFloat = 812
     
-    public func getDeviceWidth() -> CGFloat {
+    @MainActor public func getDeviceWidth() -> CGFloat {
         bounds.size.width
     }
     
-    public func getDeviceHeight() -> CGFloat {
+    @MainActor public func getDeviceHeight() -> CGFloat {
         bounds.size.height
     }
     
-    public func getNewsImageWidth() -> CGFloat {
+    @MainActor public func getNewsImageWidth() -> CGFloat {
         bounds.size.width - 30
     }
     
-    #if os(iOS)
-    public func width(_ value: CGFloat) -> CGFloat {
+#if os(iOS)
+    @MainActor public func width(_ value: CGFloat) -> CGFloat {
         switch UIDevice.modelName {
         case "iPhone 6", "iPhone 6s", "iPhone 7", "iPhone 8", "iPhone SE", "iPhone SE (2nd generation)", "iPhone SE (3rd generation)":
             let resolutionDifference = baseWidth/iphone10Width
@@ -63,7 +64,7 @@ public final class RM:Sendable {
         }
     }
     
-    public func height(_ value: CGFloat) -> CGFloat {
+    @MainActor public func height(_ value: CGFloat) -> CGFloat {
         switch UIDevice.modelName {
         case "iPhone 6", "iPhone 6s", "iPhone 7", "iPhone 8", "iPhone SE", "iPhone SE (2nd generation)", "iPhone SE (3rd generation)":
             let resolutionDifference = baseHeight/iphone10Height
@@ -81,7 +82,7 @@ public final class RM:Sendable {
             return actualHeight
         }
     }
-    #elseif os(macOS)
+#elseif os(macOS)
     public func width(_ value: CGFloat) -> CGFloat {
         let resolutionDifference = baseWidth/getDeviceWidth()
         let actualWidth = CGFloat(value)/resolutionDifference
@@ -93,5 +94,5 @@ public final class RM:Sendable {
         let actualHeight = CGFloat(value)/resolutionDifference
         return actualHeight
     }
-    #endif
+#endif
 }
