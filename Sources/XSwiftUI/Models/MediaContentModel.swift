@@ -10,7 +10,7 @@
 import Foundation
 
 //Media Content Model
-public struct MediaContentModel: Codable, Hashable, Identifiable {
+public struct MediaContentModel: Codable, Hashable, Identifiable, Sendable {
     
     public let id: UUID
     public let mediaType: MediaType
@@ -46,14 +46,14 @@ public struct MediaContentModel: Codable, Hashable, Identifiable {
 }
 
 
-public enum MediaType: String, Codable, Hashable {
+public enum MediaType: String, Codable, Hashable,Sendable {
   case gif = "gif"
   case image = "image"
   case video = "video"
 }
 
 //// MARK: - VideoData
-public struct VideoData: Codable, Hashable {
+public struct VideoData: Codable, Hashable,Sendable {
   public let url: String
   public let thumbnail: String
   public let autoplay, autoRepeat: Bool
