@@ -20,6 +20,7 @@ public struct EnvSetupView<Content: View>: View {
     GeometryReader { value in
       GeometryReader { proxy in
         content
+              .toast()
           .environment(\.mainWindowSize, proxy.size)
         // .environment(\.safeAreaInsets, proxy.safeAreaInsets)
       }

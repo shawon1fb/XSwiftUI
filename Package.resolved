@@ -1,5 +1,5 @@
 {
-  "originHash" : "05ac4874d9773ed7efd9f976178bd5f17344972da444bf513af3bf91c93e33cb",
+  "originHash" : "fb1785b772975e688e1b423e3e7fc47918687447eae5e6b1e8dad46666d01292",
   "pins" : [
     {
       "identity" : "easyx",
@@ -24,8 +24,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/airbnb/lottie-spm.git",
       "state" : {
-        "revision" : "b842598f1295f3ffa1475b1580672d1fe5b83580",
-        "version" : "4.5.0"
+        "revision" : "8c6edf4f0fa84fe9c058600a4295eb0c01661c69",
+        "version" : "4.5.1"
       }
     },
     {
@@ -33,8 +33,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SDWebImage/SDWebImage.git",
       "state" : {
-        "revision" : "10d06f6a33bafae8c164fbfd1f03391f6d4692b3",
-        "version" : "5.20.0"
+        "revision" : "e7d3256c497af9330a0df866ee38f544ddd87c49",
+        "version" : "5.20.1"
       }
     },
     {
@@ -44,6 +44,15 @@
       "state" : {
         "revision" : "451c6dfd5ecec2cf626d1d9ca81c2d4a60355172",
         "version" : "3.1.3"
+      }
+    },
+    {
+      "identity" : "suirouter",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/shawon1fb/SUIRouter.git",
+      "state" : {
+        "revision" : "caf1b43ab254261fec98a62c625d413f40e77e83",
+        "version" : "1.0.0"
       }
     },
     {
