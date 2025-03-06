@@ -143,3 +143,18 @@ struct RoundedCorner: Shape {
         return Path(path.cgPath)
     }
 }
+
+
+struct Inverted: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .rotationEffect(.radians(Double.pi))
+            .scaleEffect(x: -1, y: 1, anchor: .center)
+    }
+}
+
+public extension View {
+    func inverted() -> some View {
+        modifier(Inverted())
+    }
+}
