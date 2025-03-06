@@ -14,7 +14,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/airbnb/lottie-spm.git", from: Version(4,4,3)),
-        .package(url: "https://github.com/shawon1fb/EasyXConnect.git", from: Version(1,0,5)),
+        .package(url: "https://github.com/shawon1fb/EasyXConnect.git", from: Version(2,2,2)),
         .package(url: "https://github.com/shawon1fb/EasyX.git", from: Version(1,0,0)),
         .package(url: "https://github.com/SDWebImage/SDWebImageSwiftUI.git", from: Version(3,0,0)),
         .package(url: "https://github.com/exyte/SVGView.git", from: Version(1,0,6)),
