@@ -5,11 +5,9 @@
 //  Created by Shahanul Haque on 4/19/25.
 //
 
-
-
+import EasyX
 import EasyXConnect
 import Foundation
-import EasyX
 
 public enum URLError: Error {
   case URLNotFoundOrRegistered
@@ -29,7 +27,7 @@ public final class HTTPClient {
       let url: URL? = registerUrl ?? defaultUrl
 
       guard let url = url else { throw URLError.URLNotFoundOrRegistered }
-        
+
       let configuration = URLSessionConfiguration.default
       configuration.httpCookieAcceptPolicy = .never
       configuration.httpShouldSetCookies = false
@@ -38,17 +36,25 @@ public final class HTTPClient {
         delegate: nil,
         delegateQueue: OperationQueue()
       )
+      var intercepters: [Intercepter] = []
+      let registeredIntercepters: [Intercepter]? = try? DIContainer.shared.resolve(
+        [Intercepter].self)
+      if let registeredIntercepters = registeredIntercepters {
+        intercepters.append(contentsOf: registeredIntercepters)
+      }
 
-      var intercepters: [Intercepter] = [
+      let defaultInterseptor: [Intercepter] = [
         ApiKeyInterceptor(),
         MakeHttpJsonRequest(),
       ]
+
+      intercepters.append(contentsOf: defaultInterseptor)
 
       if let level = try? DIContainer.shared.resolve(EnumResponsePrinter.self) {
         intercepters.append(ResponsePrinter(level: level))
       }
 
-        let client = ExHttpConnect(baseURL: url, session: session, intercepters: intercepters)
+      let client = ExHttpConnect(baseURL: url, session: session, intercepters: intercepters)
 
       DIContainer.shared.register(ExHttpConnect.self, name: name) { r in
         return client
@@ -68,6 +74,12 @@ public final class HTTPClient {
   static public func enableResponsePrint(label: EnumResponsePrinter) {
     DIContainer.shared.register(EnumResponsePrinter.self) { _ in
       return label
+    }
+  }
+
+  static public func registerInterceptors(_ interceptors: [Intercepter]) {
+    DIContainer.shared.register([Intercepter].self) { _ in
+      return interceptors
     }
   }
 
