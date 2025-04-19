@@ -1,13 +1,13 @@
 {
-  "originHash" : "e2081ef855afbb2e42b0fcc71a85d7cce6be5aed64ca72eb7c55f21fb1bc4b12",
+  "originHash" : "6eb4a6a7a550a6c1fdab3bff6e97b8123e5715a2bae8f3b883f822c62ae63a6b",
   "pins" : [
     {
       "identity" : "easyx",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/shawon1fb/EasyX.git",
       "state" : {
-        "revision" : "89ee9b985e47c9a0a4bb6317b41a19e0e5472415",
-        "version" : "1.0.0"
+        "revision" : "733ec74e996b5bf7238681c7077b2bfaec99105b",
+        "version" : "1.0.4"
       }
     },
     {
@@ -33,8 +33,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SDWebImage/SDWebImage.git",
       "state" : {
-        "revision" : "e7d3256c497af9330a0df866ee38f544ddd87c49",
-        "version" : "5.20.1"
+        "revision" : "cac9a55a3ae92478a2c95042dcc8d9695d2129ca",
+        "version" : "5.21.0"
       }
     },
     {
@@ -62,6 +62,15 @@
       "state" : {
         "revision" : "6465962facdd25cb96eaebc35603afa2f15d2c0d",
         "version" : "1.0.6"
+      }
+    },
+    {
+      "identity" : "swifterswift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SwifterSwift/SwifterSwift.git",
+      "state" : {
+        "revision" : "5a6de915bb80234e1e31b3e3e5f7a7995fc1f4db",
+        "version" : "7.0.0"
       }
     }
   ],

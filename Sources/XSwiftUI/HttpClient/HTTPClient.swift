@@ -13,6 +13,7 @@ public enum URLError: Error {
   case URLNotFoundOrRegistered
 }
 
+@MainActor
 public final class HTTPClient {
 
   static public func getClient(name: String? = nil, defaultUrl: URL? = nil) throws -> ExHttpConnect
