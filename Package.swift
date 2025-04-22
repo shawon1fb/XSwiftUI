@@ -11,6 +11,9 @@ let package = Package(
         .library(
             name: "XSwiftUI",
             targets: ["XSwiftUI"]),
+        .library(
+            name: "InfiniteScrollView",
+            targets: ["InfiniteScrollView"]),
     ],
     dependencies: [
         .package(url: "https://github.com/airbnb/lottie-spm.git", from: Version(4,4,3)),
@@ -33,6 +36,9 @@ let package = Package(
                 .product(name: "SVGView", package: "SVGView"),
                 .product(name: "SUIRouter", package: "SUIRouter"),
             ]
+        ),
+        .target(
+            name: "InfiniteScrollView"
         ),
         .testTarget(
             name: "XSwiftUITests",

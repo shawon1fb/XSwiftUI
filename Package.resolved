@@ -6,8 +6,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/shawon1fb/EasyX.git",
       "state" : {
-        "revision" : "733ec74e996b5bf7238681c7077b2bfaec99105b",
-        "version" : "1.0.4"
+        "revision" : "cc5d4210801c33a46818077c2691f709e51ddc53",
+        "version" : "1.0.5"
       }
     },
     {
