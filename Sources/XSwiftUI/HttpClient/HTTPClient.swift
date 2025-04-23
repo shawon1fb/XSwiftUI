@@ -29,9 +29,14 @@ public final class HTTPClient {
 
       guard let url = url else { throw URLError.URLNotFoundOrRegistered }
 
-      let configuration = URLSessionConfiguration.default
-      configuration.httpCookieAcceptPolicy = .never
-      configuration.httpShouldSetCookies = false
+//      let configuration = URLSessionConfiguration.default
+//      configuration.httpCookieAcceptPolicy = .never
+//      configuration.httpShouldSetCookies = false
+        let configuration = URLSessionConfiguration.ephemeral
+        configuration.httpCookieAcceptPolicy = .never
+        configuration.httpShouldSetCookies = false
+        configuration.requestCachePolicy = .reloadIgnoringLocalCacheData
+        configuration.urlCache = nil
       let session = URLSession(
         configuration: configuration,
         delegate: nil,

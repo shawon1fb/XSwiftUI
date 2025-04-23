@@ -30,8 +30,8 @@ public struct MediaView: View {
 
       case .image:
               if let imageUrl = validateAndEncodeURL(from: model.imageURL) {
-//          DImageView2(image: imageUrl)
-                  DImageWithSVG(image: imageUrl)
+          DImageView2(image: imageUrl)
+//                  DImageWithSVG(image: imageUrl)
         }
 
       case .video:
